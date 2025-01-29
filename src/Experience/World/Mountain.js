@@ -14,12 +14,27 @@ export default class Mask
 
 
         // Resource
-        this.resource = this.resources.items.snowModel
+        this.arbres = this.resources.items.arbres
+        this.pont = this.resources.items.pont
+        this.sol = this.resources.items.sol
+        this.soleils = this.resources.items.soleils
 
-        this.setModel()
+        this.arbres.scene.position.y -= 10
+        this.pont.scene.position.y -= 10
+        this.sol.scene.position.y -= 10
+        this.soleils.scene.position.y -= 10
+
+        this.scene.add(this.arbres.scene)
+        this.scene.add(this.pont.scene)
+        this.scene.add(this.sol.scene)
+        this.scene.add(this.soleils.scene)
+
+        console.log(this.resources.items)
+
+        //this.setModel()
 
         // Debug
-        if(this.debug.active)
+        if(this.debug.active && this.model)
         {
             this.debugFolder = this.debug.ui.addFolder('Mountain')
 
@@ -66,11 +81,9 @@ export default class Mask
     setModel()
     {
         console.log(this.resource)
-        this.model = this.resource.scene
+        this.model = this.pont.scene
 
-        this.model.scale.set(-0.01, 0.1, 0.1)
-        this.model.position.y = 0
-        this.scene.add(this.model)
+        this.scene.add(this.pont)
 
         this.model.traverse((child) =>
         {

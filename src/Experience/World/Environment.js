@@ -14,6 +14,7 @@ export default class Environment
 
         console.log(this.resources.items.environmentMapTexture)
 
+        this.scene.background =  new THREE.Color('#c894ff')
 
         
         // Debug
@@ -41,7 +42,7 @@ export default class Environment
         this.sunLight.shadow.camera.far = 15
         this.sunLight.shadow.mapSize.set(1024, 1024)
         this.sunLight.shadow.normalBias = 0.05
-        this.sunLight.position.set(-3.728, -3.236, - 1.0)
+        this.sunLight.position.set(0, 2, - 1.0)
         this.scene.add(this.sunLight)
 
         // Debug
@@ -82,7 +83,7 @@ export default class Environment
     setEnvironmentMap()
     {
         this.environmentMap = {}
-        this.environmentMap.intensity = 2.4
+        this.environmentMap.intensity = 1
         this.environmentMap.texture = this.resources.items.environmentMapTexture
         this.environmentMap.texture.colorSpace = THREE.SRGBColorSpace
         this.environmentMap.texture.mapping = THREE.EquirectangularReflectionMapping;
@@ -103,14 +104,13 @@ export default class Environment
             })
         }
         // this.scene.backgroundBlurriness = 0.9
-        // this.scene.fog = new THREE.Fog( 0xcccccc, 10, 300)
+        this.scene.fog = new THREE.Fog( 0xcccccc, 10, 300)
 
-        // this.scene.background = this.debugObject.color 
+        //this.scene.background = this.debugObject.color 
         // this.scene.environment = this.resources.items.environmentMapTexture
         this.environmentMap.updateMaterials()
-
         this.scene.environment = this.resources.items.environmentMapTexture
-        this.scene.background = this.resources.items.environmentMapTexture
+        //this.scene.background = this.resources.items.environmentMapTexture
 
         console.log(this.scene.environment)
 
@@ -125,7 +125,7 @@ export default class Environment
                 .max(4)
                 .step(0.001)
                 .onChange(this.environmentMap.updateMaterials)
-            /*
+            
             this.debugFolder
                 .addColor(this.debugObject , 'color')
                 .name('background color')
@@ -135,7 +135,7 @@ export default class Environment
                     this.debugObject.color = value
                     this.scene.background =  new THREE.Color(this.debugObject.color)
                 })
-            */
+            
         }
     }
 

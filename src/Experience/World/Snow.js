@@ -49,7 +49,7 @@ export default class Snow
 
         // Geometry
         this.particlesGeometry = new THREE.BufferGeometry()
-        this.count = 25000
+        this.count = 2500
 
         // Position
         this.positions = new Float32Array(this.count * 3)
@@ -109,14 +109,14 @@ export default class Snow
             this.isOrder = true
 
             this.camera.instance.position.set(
-                40,
-                7,
-                -68
+                118.26296736230518,
+                45.74696178109149,
+                -21.04147625227296
             )
             this.camera.instance.rotation.set(
-                -3,
-                0.5,
-                3
+                -2.00189670707885,
+                1.16826503509461,
+                2.034372083999237
             )
         })
 
@@ -324,7 +324,7 @@ export default class Snow
                 this.positions[i3] = this.initialPositions[i].x;
                 this.positions[i3 + 1] = this.initialPositions[i].y;
                 this.positions[i3 + 2] = this.initialPositions[i].z;
-                /*
+                
                 if(!this.isOrder){
                     if(i == 0){
                         this.camera.instance.position.set(
@@ -335,7 +335,7 @@ export default class Snow
                     }
                 }
 
-                */
+                
                 
                 
             }
