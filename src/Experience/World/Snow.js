@@ -123,7 +123,7 @@ export default class Snow
         // Debug
         if(this.debug.active)
         {
-            this.debugFolder = this.debug.ui.addFolder('Snow')
+            // this.debugFolder = this.debug.ui.addFolder('Snow')
 
             /*
             this.debugFolder
@@ -325,6 +325,7 @@ export default class Snow
                 this.positions[i3 + 1] = this.initialPositions[i].y;
                 this.positions[i3 + 2] = this.initialPositions[i].z;
                 
+                /*
                 if(!this.isOrder){
                     if(i == 0){
                         this.camera.instance.position.set(
@@ -334,7 +335,7 @@ export default class Snow
                         )
                     }
                 }
-
+                */
                 
                 
                 

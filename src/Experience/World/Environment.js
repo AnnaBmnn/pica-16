@@ -10,11 +10,11 @@ export default class Environment
         this.scene = this.experience.scene
         this.resources = this.experience.resources
         this.debug = this.experience.debug
-        this.debugObject = {color: '#a778d8'}
+        this.debugObject = {color: '#B265FF'}
 
         console.log(this.resources.items.environmentMapTexture)
 
-        this.scene.background =  new THREE.Color('#c894ff')
+        this.scene.background =  new THREE.Color('#B265FF')
 
         
         // Debug
@@ -37,12 +37,12 @@ export default class Environment
 
     setSunLight()
     {
-        this.sunLight = new THREE.DirectionalLight('#6772AB', 4)
+        this.sunLight = new THREE.DirectionalLight('#B265FF', 1)
         this.sunLight.castShadow = true
         this.sunLight.shadow.camera.far = 15
         this.sunLight.shadow.mapSize.set(1024, 1024)
         this.sunLight.shadow.normalBias = 0.05
-        this.sunLight.position.set(0, 2, - 1.0)
+        this.sunLight.position.set(-1.7, 3, - 1.0)
         this.scene.add(this.sunLight)
 
         // Debug
@@ -104,7 +104,7 @@ export default class Environment
             })
         }
         // this.scene.backgroundBlurriness = 0.9
-        this.scene.fog = new THREE.Fog( 0xcccccc, 10, 300)
+        // this.scene.fog = new THREE.Fog( 0xcccccc, 10, 300)
 
         //this.scene.background = this.debugObject.color 
         // this.scene.environment = this.resources.items.environmentMapTexture

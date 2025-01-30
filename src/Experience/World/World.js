@@ -1,6 +1,6 @@
 import Experience from '../Experience.js'
 import Environment from './Environment.js'
-// import Floor from './Floor.js'
+import Floor from './Floor.js'
 // import Fox from './Fox.js'
 import Mask from './Mask.js'
 import Mountain from './Mountain.js'
@@ -25,7 +25,7 @@ export default class World
         this.resources.on('ready', () =>
         {
             // Setup
-            // this.floor = new Floor()
+            this.floor = new Floor()
             // this.fox = new Fox()
             //this.mask = new Mask()
             this.mountain = new Mountain()

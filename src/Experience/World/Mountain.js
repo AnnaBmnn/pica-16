@@ -16,17 +16,17 @@ export default class Mask
         // Resource
         this.arbres = this.resources.items.arbres
         this.pont = this.resources.items.pont
-        this.sol = this.resources.items.sol
+        // this.sol = this.resources.items.sol
         this.soleils = this.resources.items.soleils
 
         this.arbres.scene.position.y -= 10
         this.pont.scene.position.y -= 10
-        this.sol.scene.position.y -= 10
+        // this.sol.scene.position.y -= 10
         this.soleils.scene.position.y -= 10
 
         this.scene.add(this.arbres.scene)
         this.scene.add(this.pont.scene)
-        this.scene.add(this.sol.scene)
+        // this.scene.add(this.sol.scene)
         this.scene.add(this.soleils.scene)
 
         console.log(this.resources.items)

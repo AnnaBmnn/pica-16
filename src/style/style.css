@@ -16,9 +16,16 @@ body
     top: 0;
     left: 0;
     outline: none;
+    z-index: 2;
 }
 
 .display-none 
 {
     display: none;
+}
+
+video {
+    pointer-events: none;
+    position: fixed;
+    top: 0;
 }
