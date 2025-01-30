@@ -16,7 +16,7 @@ body
     top: 0;
     left: 0;
     outline: none;
-    z-index: 2;
+    /* z-index: 2; */
 }
 
 .display-none 
@@ -28,4 +28,5 @@ video {
     pointer-events: none;
     position: fixed;
     top: 0;
+    z-index: -1;
 }
