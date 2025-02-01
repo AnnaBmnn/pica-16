@@ -5,6 +5,8 @@ import Floor from './Floor.js'
 import Mask from './Mask.js'
 import Mountain from './Mountain.js'
 import Snow from './Snow.js'
+import Tree from './Tree.js'
+
 
 import Plans from './Plans.js'
 import Plan from './Plan.js'
@@ -30,6 +32,8 @@ export default class World
             //this.mask = new Mask()
             this.mountain = new Mountain()
             this.snow = new Snow()
+            this.tree = new Tree()
+
 
 
             // this.plans = new Plans()

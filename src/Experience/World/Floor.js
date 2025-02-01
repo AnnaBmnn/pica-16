@@ -1,7 +1,7 @@
 import * as THREE from 'three'
 import Experience from '../Experience.js'
 
-export default class Mask
+export default class Floor
 {
     constructor()
     {
