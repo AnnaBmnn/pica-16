@@ -1,5 +1,6 @@
 varying vec2 vUv;
 varying vec4 vPosition;
+varying float vTime;
 
 
 float random(vec2 st)
@@ -17,26 +18,84 @@ vec2 rotate(vec2 uv, float rotation, vec2 mid)
 }
 
 
+vec4 permute(vec4 x)
+{
+    return mod(((x*34.0)+1.0)*x, 289.0);
+}
+
+//	Classic Perlin 2D Noise 
+//	by Stefan Gustavson
+//
+vec2 fade(vec2 t)
+{
+    return t*t*t*(t*(t*6.0-15.0)+10.0);
+}
+
+float cnoise(vec2 P)
+{
+    vec4 Pi = floor(P.xyxy) + vec4(0.0, 0.0, 1.0, 1.0);
+    vec4 Pf = fract(P.xyxy) - vec4(0.0, 0.0, 1.0, 1.0);
+    Pi = mod(Pi, 289.0); // To avoid truncation effects in permutation
+    vec4 ix = Pi.xzxz;
+    vec4 iy = Pi.yyww;
+    vec4 fx = Pf.xzxz;
+    vec4 fy = Pf.yyww;
+    vec4 i = permute(permute(ix) + iy);
+    vec4 gx = 2.0 * fract(i * 0.0243902439) - 1.0; // 1/41 = 0.024...
+    vec4 gy = abs(gx) - 0.5;
+    vec4 tx = floor(gx + 0.5);
+    gx = gx - tx;
+    vec2 g00 = vec2(gx.x,gy.x);
+    vec2 g10 = vec2(gx.y,gy.y);
+    vec2 g01 = vec2(gx.z,gy.z);
+    vec2 g11 = vec2(gx.w,gy.w);
+    vec4 norm = 1.79284291400159 - 0.85373472095314 * vec4(dot(g00, g00), dot(g01, g01), dot(g10, g10), dot(g11, g11));
+    g00 *= norm.x;
+    g01 *= norm.y;
+    g10 *= norm.z;
+    g11 *= norm.w;
+    float n00 = dot(g00, vec2(fx.x, fy.x));
+    float n10 = dot(g10, vec2(fx.y, fy.y));
+    float n01 = dot(g01, vec2(fx.z, fy.z));
+    float n11 = dot(g11, vec2(fx.w, fy.w));
+    vec2 fade_xy = fade(Pf.xy);
+    vec2 n_x = mix(vec2(n00, n01), vec2(n10, n11), fade_xy.x);
+    float n_xy = mix(n_x.x, n_x.y, fade_xy.y);
+    return 2.3 * n_xy;
+}
+
 
 void main()
 {
     vec2 uvDeform = vUv;
-    uvDeform.x += sin(vUv.y * 0.1) * 0.3;
-    uvDeform.y += sin(vUv.x * 2.1) * 1.2;
+    uvDeform.x += sin(vUv.y * 0.1 + 2.0 + vTime * 0.000001) * 0.3;
+    uvDeform.y += sin(vUv.x * 2.1 + 3.0 + vTime * 0.000003) * 1.2;
 
     // uvDeform.y += random(vUv) * 0.001;
 
 
-    float patternX = step(0.5, mod( uvDeform.x * 100.0, 1.0));
-    float patternY = step(0.5, mod( uvDeform.y * 250.0, 1.0));
-    float pattern = mod(patternX + patternY , 2.0 );
+    float patternSquareX = step(0.5, mod( uvDeform.x * 1000.0 - vTime * 0.000001 , 1.0));
+    float patternSquareY = step(0.5, mod( uvDeform.y * 1000.0, 1.0));
+    float patternSquare = mod(patternSquareX + patternSquareY , 2.0 );
 
-    // pattern /= random(vUv) * 10.0;
 
-    csm_DiffuseColor.rgb *= vec3(pattern * sign(cos(vUv.x * 0.0001)) * random(vUv));
-    csm_Emissive.rgb *= vec3(pattern * sign(cos(vUv.x * 0.0001)) * random(vUv));
+    float patternRecX = step(0.5, mod( vUv.x * 5000.0, 1.0));
+    float patternRecY = step(0.5, mod( vUv.y * 45.0, 1.0));
+    float patternRec = mod(patternRecX + patternRecY , 2.0 );
 
-    csm_Emissive.rgb += random(vUv) * 0.2;
+    patternRec +=  random(vUv) ;
+    patternRec *=  random(vUv) ;
+
+    float bigNoise =  cnoise(vUv.xy * 25.08) * random(vUv * 10.0) + cnoise(vUv.xy * 0.008);
+
+
+    float pattern = patternRec * patternSquare + bigNoise;
+
+
+    csm_DiffuseColor.rgb *= vec3( pattern );
+    csm_Emissive.rgb *= vec3(pattern);
+
+    // csm_Emissive.rgb += random(vUv) * 0.2;
     // csm_DiffuseColor.rgb = vec3(vUv.y * 10.0);
 
 

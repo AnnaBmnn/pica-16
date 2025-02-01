@@ -54,6 +54,8 @@ export default class World
             this.mountain.update()
         if(this.snow)
             this.snow.update()
+        if(this.tree)
+            this.tree.update()
         if(this.plans)
             this.plans.update()
         if(this.plan)

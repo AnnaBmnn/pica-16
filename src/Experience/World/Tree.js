@@ -14,7 +14,10 @@ export default class Tree
         this.time = this.experience.time
         this.debug = this.experience.debug
 
+        this.uniforms = null
+
         console.log(CustomShaderMaterial)
+        this.setMaterial = this.setMaterial.bind(this)
 
         this.video = document.querySelector('.js-video-tree')
 
@@ -63,12 +66,17 @@ export default class Tree
     setMaterial()
     {
         // this.tree.children[0].material.emissive = new THREE.Color('#000000')
+        this.uniforms = {
+            uTime: new THREE.Uniform(0)
+        }
 
         const material = new CustomShaderMaterial({
             // CSM
             baseMaterial: this.tree.children[0].material,
             vertexShader: screenVertexShader,
             fragmentShader: screenFragmentShader,
+
+            uniforms: this.uniforms,
         })
 
         this.tree.children[0].material = material
@@ -130,10 +138,12 @@ export default class Tree
     }
     update()
     {
-        if(this.experience){
+        if(this.uniforms){
             //let _scale = this.experience.world.audio.frequenceAverage * 0.005
             //this.model.scale.set(_scale, _scale, _scale)
 
+            // Materials
+            this.uniforms.uTime.value = this.time.elapsed
         }
 
     }

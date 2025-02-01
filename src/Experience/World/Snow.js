@@ -23,18 +23,12 @@ export default class Snow
         // Resource
         this.resources = 
         [
-            this.resources.items.snowFlakeTexture1,
-            this.resources.items.snowFlakeTexture2,
-            this.resources.items.snowFlakeTexture3,
-            this.resources.items.snowFlakeTexture4,
+            this.resources.items.snowFlakeTexture1
         ]
 
 
         this.parameters = [
-            [[ 0.0, 0.0, 1.0 ], this.resources[0], 1.0 ],
-            [[ 0.0, 0.0, 1.0 ], this.resources[1], 0.9 ],
-            [[ 0.0, 0.0, 1.0 ], this.resources[2], 0.7 ],
-            [[ 0.0, 0.0, 1.0 ], this.resources[3], 0.5 ],
+            [[ 0.0, 0.0, 1.0 ], this.resources[0], 1.0 ]
         ]
 
         /*
@@ -49,7 +43,7 @@ export default class Snow
 
         // Geometry
         this.particlesGeometry = new THREE.BufferGeometry()
-        this.count = 2500
+        this.count = 100000
 
         // Position
         this.positions = new Float32Array(this.count * 3)
@@ -57,14 +51,16 @@ export default class Snow
 
         this.particlesGeometry.setAttribute('position', new THREE.BufferAttribute(this.positions, 3));
 
+        console.log(this.resources[0])
         // Materials
         this.particlesMaterial = new THREE.PointsMaterial({
-            size: 0.1,
+            size: 1.0,
             sizeAttenuation: true,
-            color: new THREE.Color('#4ab8e2'),
+            color: new THREE.Color('#FFFFFF'),
+            map: this.resources[0],
             transparent: true,
-            // alphaMap: this.resources[0],
-            // alphaTest: 0.5,
+            alphaMap: this.resources[0],
+            alphaTest: 0.5,
             //depthTest: false,
             depthWrite: false,
             // blending: THREE.AdditiveBlending,
@@ -72,10 +68,12 @@ export default class Snow
         });
 
 
+
+
         // Points
         this.particles = new THREE.Points(this.particlesGeometry, this.particlesMaterial);
-        this.particles.position.set(0, 0, 0);
-        this.particles.scale.set(10.0, 10.0, 10.0);
+        this.particles.position.set(0, 2, 0);
+        this.particles.scale.set(15.0, 15.0, 15.0);
         this.scene.add(this.particles);
 
         this.initialParams = {

@@ -13,6 +13,11 @@ export default [
         ]
     },
     {
+        name: 'snowFlakeTexture1',
+        type: 'texture',
+        path: 'textures/snowflake1.png'
+    },
+    {
         name: 'arbres',
         type: 'gltfModel',
         path: 'models/arbres.glb'
