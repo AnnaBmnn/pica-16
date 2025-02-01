@@ -54,7 +54,7 @@ export default class Snow
         console.log(this.resources[0])
         // Materials
         this.particlesMaterial = new THREE.PointsMaterial({
-            size: 1.0,
+            size: 1.5,
             sizeAttenuation: true,
             color: new THREE.Color('#FFFFFF'),
             map: this.resources[0],
@@ -121,17 +121,57 @@ export default class Snow
         // Debug
         if(this.debug.active)
         {
-            // this.debugFolder = this.debug.ui.addFolder('Snow')
+            this.debugFolder = this.debug.ui.addFolder('Attractor')
 
-            /*
+            
             this.debugFolder
-                .add(this.geometry.position, 'x')
+                .add(this.particles.position, 'x')
                 .name('position x')
                 .min(-100)
                 .max(100)
-                .step(0.01)
-            */
-            
+                .step(0.1)
+ 
+            this.debugFolder
+                .add(this.particles.position, 'y')
+                .name('position y')
+                .min(-100)
+                .max(100)
+                .step(0.1)
+
+            this.debugFolder
+                .add(this.particles.position, 'z')
+                .name('position z')
+                .min(-100)
+                .max(100)
+                .step(0.1)  
+
+            this.debugFolder
+                .add(this.particles.rotation, 'y')
+                .name('rotation y')
+                .min(-3.14)
+                .max(3.14)
+                .step(0.01)  
+
+            this.debugFolder
+                .add(this.particles.scale, 'x')
+                .name('scale x')
+                .min(0)
+                .max(100)
+                .step(0.01)  
+
+            this.debugFolder
+                .add(this.particles.scale, 'y')
+                .name('scale y')
+                .min(0)
+                .max(100)
+                .step(0.01)  
+
+            this.debugFolder
+                .add(this.particles.scale, 'z')
+                .name('scale z')
+                .min(0)
+                .max(100)
+                .step(0.01)  
         }
     }
     resetInitialPositions (){

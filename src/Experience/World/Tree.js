@@ -50,16 +50,16 @@ export default class Tree
 
 
         // Debug
-        if(this.debug.active && this.model)
+        if(this.debug.active )
         {
-            this.debugFolder = this.debug.ui.addFolder('Floor')
+            this.debugFolder = this.debug.ui.addFolder('Tree')
 
             this.debugFolder
-                .add(this.model.position, 'x')
-                .name('position x')
-                .min(-100)
-                .max(100)
-                .step(0.01)
+                .add(this.tree.position, 'y')
+                .name('position y')
+                .min(-20)
+                .max(20)
+                .step(0.1)
 
         }
     }
