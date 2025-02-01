@@ -1,5 +1,8 @@
 import * as THREE from 'three'
 import Experience from '../Experience.js'
+import CustomShaderMaterial from 'three-custom-shader-material/vanilla'
+import screenVertexShader from '../../shaders/vertex.glsl'
+import screenFragmentShader from '../../shaders/fragment.glsl'
 
 export default class Tree
 {
@@ -11,18 +14,20 @@ export default class Tree
         this.time = this.experience.time
         this.debug = this.experience.debug
 
+        console.log(CustomShaderMaterial)
+
         this.video = document.querySelector('.js-video-tree')
 
 
         // Resource
         this.tree = this.resources.items.arbres.scene
 
-        this.tree.position.y -= 10
+        this.tree.position.y -= 0
 
-        this.tree2 = this.tree.clone()
+        // this.tree2 = this.tree.clone()
 
         this.scene.add(this.tree)
-        this.scene.add(this.tree2)
+        // this.scene.add(this.tree2)
 
 
         this.tree.traverse((child) =>
@@ -36,7 +41,10 @@ export default class Tree
         })
 
         //this.setModel()
-        this.loadTexture()
+        // this.loadTexture()
+        // this.tweakMaterial()
+        this.setMaterial()
+
 
         // Debug
         if(this.debug.active && this.model)
@@ -52,6 +60,19 @@ export default class Tree
 
         }
     }
+    setMaterial()
+    {
+        // this.tree.children[0].material.emissive = new THREE.Color('#000000')
+
+        const material = new CustomShaderMaterial({
+            // CSM
+            baseMaterial: this.tree.children[0].material,
+            vertexShader: screenVertexShader,
+            fragmentShader: screenFragmentShader,
+        })
+
+        this.tree.children[0].material = material
+    }
     loadTexture()
     {
         this.video.addEventListener('canplaythrough', ()=> {
@@ -61,15 +82,52 @@ export default class Tree
             console.log(this.tree)
 
             this.tree.children[0].material.emissiveMap = this.texture
-            this.texture.magFilter = THREE.NearestFilter
-            this.texture.minFilter = THREE.NearestFilter
+            // this.texture.magFilter = THREE.NearestFilter
+            // this.texture.minFilter = THREE.NearestFilter
             // this.tree.children[0].material.map = this.texture
             // this.tree.children[0].material.emissive = new THREE.Color('#FFFFFF')
 
-            this.tree.children[0].material.needsUpdate = true   
+
+            this.tree.children[0].material.needsUpdate = true
+            
+            this.tweakMaterial()
         }, {once: true})
     }
+    tweakMaterial(){
+        // this.tree.children[0].material.map = null
+        // this.tree.children[0].material.emissiveMap = null
+        this.tree.children[0].material.emissive = new THREE.Color('#000000')
+        // this.tree.children[0].material.color = new THREE.Color('#000000')
+        this.tree.children[0].material.needsUpdate = true
 
+
+        this.tree.children[0].material.onBeforeCompile = (shader) =>
+        {
+            console.log(shader)
+            shader.fragmentShader = shader.fragmentShader.replace(
+                '#include <begin_vertex>',
+                `
+                    #include <begin_vertex> 
+                    vPosition = vec3( position );
+                    varying vec2 vUv;
+                    vUv = uv;
+                `
+            )
+            
+            shader.fragmentShader = shader.fragmentShader.replace(
+                '#include <color_fragment>',
+                `
+                    #include <color_fragment> 
+
+                    diffuseColor.rgb *=  step(0.5, mod(vUv.y * 10.0, 1.0));
+
+
+                `
+            )
+            // shader.vertexShader = shader.vertexShader.replace('#include <begin_vertex>', '')
+            
+        } 
+    }
     update()
     {
         if(this.experience){
