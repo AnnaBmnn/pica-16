@@ -43,7 +43,7 @@ export default class Snow
 
         // Geometry
         this.particlesGeometry = new THREE.BufferGeometry()
-        this.count = 100000
+        this.count = 10000
 
         // Position
         this.positions = new Float32Array(this.count * 3)
@@ -74,6 +74,7 @@ export default class Snow
         this.particles = new THREE.Points(this.particlesGeometry, this.particlesMaterial);
         this.particles.position.set(0, 2, 0);
         this.particles.scale.set(15.0, 15.0, 15.0);
+        this.particles.visible = false;
         this.scene.add(this.particles);
 
         this.initialParams = {
@@ -86,21 +87,21 @@ export default class Snow
             autoRotate: true
         };
         // attractor chua
-        this.dt = 1.0; // Time step for attractor simulation
+        this.dt = 0.09; // Time step for attractor simulation
         // this.dt = 0.0001;
         this.setCurve = this.setCurve.bind(this)
         this.attractor = this.attractor.bind(this)
         this.attractorChau = this.attractorChau.bind(this)
 
-        const axesHelper = new THREE.AxesHelper( 5 )
-        this.scene.add( axesHelper );
+        // const axesHelper = new THREE.AxesHelper( 5 )
+        // this.scene.add( axesHelper );
 
         this.initialPositions = []
         this.resetInitialPositions()
         this.setCurve()
 
         this.experience.trigger.on('trigger-stimulus', ()=>{
-            this.curveObject.visible = true
+            this.particles.visible = true
         })
 
         this.experience.trigger.on('trigger-order', ()=>{
@@ -172,6 +173,13 @@ export default class Snow
                 .min(0)
                 .max(100)
                 .step(0.01)  
+
+                this.debugFolder
+                .add(this, 'dt')
+                .name('vitesse particules')
+                .min(0)
+                .max(2)
+                .step(0.00001)  
         }
     }
     resetInitialPositions (){
@@ -363,7 +371,7 @@ export default class Snow
                 this.positions[i3 + 1] = this.initialPositions[i].y;
                 this.positions[i3 + 2] = this.initialPositions[i].z;
                 
-                /*
+                
                 if(!this.isOrder){
                     if(i == 0){
                         this.camera.instance.position.set(
@@ -373,7 +381,7 @@ export default class Snow
                         )
                     }
                 }
-                */
+                
                 
                 
                 

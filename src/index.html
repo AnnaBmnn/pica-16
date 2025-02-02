@@ -4,18 +4,33 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pica 16 - de l'ordre dans le chaos </title>
-    <link rel="stylesheet" href="./style/section.css">
     <link rel="stylesheet" href="./style/style.css">
+    <link rel="stylesheet" href="./style/section.css">
+    <link rel="stylesheet" href="./style/instruction.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Besley:ital,wght@1,600&family=Noto+Sans&display=swap" rel="stylesheet">
 </head>
 <body>
     <section class="js-section section js-section-first">
-        <h1 class="section__title">De l'ordre dans le chaos</h1>
-        <div>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Deleniti doloribus, eveniet vero, voluptatum, et dolorum vel voluptatibus rerum esse a nemo beatae provident. Earum vero deleniti non impedit dolore. Neque.</div>
+        <div>
+            <h1 class="section__title">De l'ordre <br> dans le chaos</h1>
+            <div class="section__text">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Deleniti doloribus, eveniet vero, voluptatum, et dolorum vel voluptatibus rerum esse a nemo beatae provident. Earum vero deleniti non impedit dolore. Neque.</div>
 
-        <button class="section__button js-button-next">commencer</button>
+        </div>
+
+        <button class="section__button js-button-next">Commencer</button>
     </section>
-    <button class="trigger__button js-button-trigger-order">cliquer ici</button>
-    <button class="trigger__button js-button-trigger-stimulus">cliquer ici</button>
+    <div class="instruction instruction--stimulus js-section-stimulus">
+        <p>Je dérive de manière imprévisible, mon chemin se tordant de manière aléatoire et sans ordre.</p>
+        <button class="trigger__button instruction__button js-button-trigger-stimulus">Continuer</button>
+        <img class="instruction__bg" src="/imgs/bg.svg"></img>
+    </div>
+    <div class="instruction instruction--order js-section-order">
+        <p>Je remarque que d'autres bougent comme moi, leurs trajectoires me sont étrangement familières.</p>
+        <button class="trigger__button instruction__button js-button-trigger-order">Continuer</button>
+        <img class="instruction__bg" src="/imgs/bg.svg"></img>
+    </div>
 
     <canvas class="webgl "></canvas>
     <video autoplay muted loop id="floor" playsinline class="js-video-floor" src="/textures/solAnimation.mp4" ></video>

@@ -1,0 +1,42 @@
+.instruction 
+{
+    position: absolute;
+    z-index: 2;
+
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease-in-out;
+    width: 25vw;
+    min-width: 250px;
+    padding: 24px;
+}
+
+.instruction--stimulus 
+{
+    left: 0;
+    bottom: 0;
+}
+
+.instruction--order 
+{
+    right: 0;
+    top: 0;
+}
+
+.instruction.is-visible 
+{
+    opacity: 1;
+    pointer-events: all;
+}
+
+.instruction__button {
+    margin-top: 12px;
+}
+
+.instruction__bg {
+    position: absolute;
+    width: 200vw;
+    height: 200vh;
+    transform: translate(-50%, -50%);
+    z-index: -2;
+}

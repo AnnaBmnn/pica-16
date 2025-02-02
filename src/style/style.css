@@ -8,6 +8,13 @@ html,
 body
 {
     overflow: hidden;
+    color: white;
+    font-family: "Noto Sans", serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    letter-spacing: 2px;
+    line-height: 125%;
 }
 
 .webgl
@@ -29,4 +36,24 @@ video {
     position: fixed;
     top: 0;
     z-index: -1;
+}
+
+button {
+    border-radius: 6px;
+    border: none;
+    padding: 10px 23px;
+    font-size: 18px;
+    opacity: 1;
+    backdrop-filter: blur(0px);
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    border: 1px solid white;
+}
+
+button:hover {
+    border: 1px solid white;
+    /* opacity: 0.3; */
+    background-color: rgb(77 77 77 / 30%);
+    backdrop-filter: blur(50px);
+    color: white;
 }
