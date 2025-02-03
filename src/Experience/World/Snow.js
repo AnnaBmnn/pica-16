@@ -3,6 +3,8 @@
 
 import * as THREE from 'three'
 import Experience from '../Experience.js'
+import gsap from 'gsap'
+
 
 // https://fusefactory.github.io/openfuse/strange%20attractors/particle%20system/Strange-Attractors-GPU/
 
@@ -43,7 +45,7 @@ export default class Snow
 
         // Geometry
         this.particlesGeometry = new THREE.BufferGeometry()
-        this.count = 10000
+        this.count = 50000
 
         // Position
         this.positions = new Float32Array(this.count * 3)
@@ -51,7 +53,6 @@ export default class Snow
 
         this.particlesGeometry.setAttribute('position', new THREE.BufferAttribute(this.positions, 3));
 
-        console.log(this.resources[0])
         // Materials
         this.particlesMaterial = new THREE.PointsMaterial({
             size: 1.5,
@@ -67,7 +68,12 @@ export default class Snow
             vertexColors: true,
         });
 
-
+        const geometry = new THREE.SphereGeometry(1, 32, 16);
+        const material = new THREE.MeshBasicMaterial({
+          color: 0xff0000
+        });
+        this.sphere = new THREE.Mesh(geometry, material);
+        this.scene.add(this.sphere);
 
 
         // Points
@@ -106,17 +112,29 @@ export default class Snow
 
         this.experience.trigger.on('trigger-order', ()=>{
             this.isOrder = true
-
-            this.camera.instance.position.set(
-                118.26296736230518,
-                45.74696178109149,
-                -21.04147625227296
+            gsap.to(
+                this.camera.instance.position,
+                {
+                    duration: 7,
+                    ease: 'power2.inOut',
+                    x: 118.26296736230518,
+                    y: 45.74696178109149,
+                    z: this.camera.instance.position.z  - 21.04147625227296
+                }
             )
-            this.camera.instance.rotation.set(
-                -2.00189670707885,
-                1.16826503509461,
-                2.034372083999237
-            )
+            window.setTimeout(() => {
+                this.isAnimDone = true
+            }, 7200);
+            // gsap.to(
+            //     this.camera.instance.rotation,
+            //     {
+            //         duration: 7,
+            //         ease: 'power2.inOut',
+            //         x: -2.00189670707885,
+            //         y: 1.16826503509461,
+            //         z: 2.034372083999237
+            //     }
+            // )
         })
 
         // Debug
@@ -317,7 +335,7 @@ export default class Snow
                 size: size, 
                 map: sprite, 
                 blending: THREE.AdditiveBlending,  
-                depthTest: false, 
+                // depthTest: true, 
                 transparent: true, 
                 sizeAttenuation: true, 
                 alphaMap: sprite,
@@ -331,14 +349,12 @@ export default class Snow
             particles.rotation.z = Math.random() * 6
 
             this.scene.add( particles )
-            console.log(particles)
 
         }
     }
     
     attractorChau(x, y, z)
     {
-
         const c1 = 15.6
         const c2 = 1
         const c3 = 28
@@ -364,7 +380,6 @@ export default class Snow
                 this.initialPositions[i].y += dy * this.dt;
                 this.initialPositions[i].z += dz * this.dt;
 
-                // console.log(dx)
         
                 const i3 = i * 3;
                 this.positions[i3] = this.initialPositions[i].x;
@@ -372,15 +387,52 @@ export default class Snow
                 this.positions[i3 + 2] = this.initialPositions[i].z;
                 
                 
-                if(!this.isOrder){
-                    if(i == 0){
-                        this.camera.instance.position.set(
-                            this.initialPositions[i].x,
-                            this.initialPositions[i].y,
-                            this.initialPositions[i].z
+                    if(i == 1200){
+                        const position = this.particles.localToWorld( 
+                            new THREE.Vector3(
+                                this.initialPositions[i].x,
+                                this.initialPositions[i].y,
+                                this.initialPositions[i].z
+                            )
                         )
+
+                        const positionBefore = this.particles.localToWorld( 
+                            new THREE.Vector3(
+                                x,
+                                y,
+                                z
+                            )
+                        )                        
+
+                        // this.camera.instance.lookAt(
+                        //     positionBefore.x,
+                        //     positionBefore.y,
+                        //     positionBefore.z
+                        // )
+                        this.sphere.position.set(
+                            positionBefore.x + 0.5,
+                            positionBefore.y + 0.5,
+                            positionBefore.z + 0.5
+                        )
+                        if(!this.isOrder){
+
+                            this.camera.instance.position.set(
+                                position.x,
+                                position.y ,
+                                position.z
+                            )
+
+                        }
+                        if(!this.isAnimDone){
+                            this.camera.instance.lookAt(
+                                positionBefore.x,
+                                positionBefore.y,
+                                positionBefore.z
+                            )
+                        }
+
                     }
-                }
+                
                 
                 
                 
