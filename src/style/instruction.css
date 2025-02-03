@@ -33,6 +33,42 @@
     margin-top: 12px;
 }
 
+.instruction--stimulus  .instruction__bg {
+    position: absolute;
+    border-radius: 50%;
+    top: 50%;
+    left: 20%;
+    /* right: 0; */
+    bottom: 0;
+    width: 75vw;
+    height: 45vw;
+    min-width: 600px;
+    min-height: 600px;
+    transform: translate(-50%, -50%);
+    /* box-shadow: 3px 3px red, 20px -20px 100px olive; */
+    background: radial-gradient(#e66465 0, #9198e500);
+    z-index: -1;
+    background: radial-gradient(ellipse, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.9) 20%, rgba(0, 0, 0, 0) 70%);
+}
+
+.instruction--order  .instruction__bg {
+    position: absolute;
+    border-radius: 50%;
+    top: 50%;
+    left: 70%;
+    /* right: -10%; */
+    bottom: 0;
+    width: 125vw;
+    height: 45vw;
+    min-width: 1000px;
+    min-height: 600px;
+    transform: translate(-50%, -50%);
+    /* box-shadow: 3px 3px red, 20px -20px 100px olive; */
+    background: radial-gradient(#e66465 0, #9198e500);
+    z-index: -1;
+    background: radial-gradient(ellipse, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.9) 20%, rgba(0, 0, 0, 0) 70%);
+}
+/* 
 .instruction__bg {
     position: absolute;
     width: 200vw;
@@ -40,4 +76,4 @@
     transform: translate(-50%, -50%);
     z-index: -2;
     pointer-events: none;
-}
+} */
