@@ -40,7 +40,7 @@ export default class World
             // this.plan = new Plan()
             // this.videos = new Videos()
 
-            // this.audio = new Audio()
+            this.audio = new Audio()
 
             this.environment = new Environment()
         })
@@ -62,7 +62,5 @@ export default class World
             this.plan.update()
         if(this.videos)
             this.videos.update()
-        if(this.audio)
-            this.audio.update()
     }
 }

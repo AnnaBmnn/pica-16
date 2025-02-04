@@ -32,6 +32,7 @@ export default class Trigger extends EventEmitter
     }
     hideScreen()
     {
+        this.trigger('trigger-intro')
         this.firstSection.classList.add('is-hidden')
 
         window.setTimeout(() => {

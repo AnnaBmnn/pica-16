@@ -10,9 +10,29 @@ export default class Camera
         this.sizes = this.experience.sizes
         this.scene = this.experience.scene
         this.canvas = this.experience.canvas
+        this.resources = this.experience.resources
+
 
         this.setInstance()
-        this.setControls()
+        this.resources.on('ready', () =>
+        {
+            window.setTimeout(() => {
+                this.setControls()
+                
+            }, 100)
+        })
+        //     window.setTimeout(() => {
+        //         this.setControls()
+                
+        //     }, 10000)
+
+        // this.experience.trigger.on('trigger-order', ()=>{
+        //     window.setTimeout(() => {
+        //         this.setControls()
+                
+        //     }, 10000)
+
+        // })
     }
 
     setInstance()
@@ -26,8 +46,9 @@ export default class Camera
     {
         this.controls = new OrbitControls(this.instance, this.canvas)
         this.controls.enableDamping = true
-        this.controls.maxDistance = 180
-        
+        this.controls.maxDistance = 160
+        this.controls.target = this.experience.world.snow.particles.position
+        console.log(this.experience.world)
     }
 
     resize()
@@ -38,6 +59,9 @@ export default class Camera
 
     update()
     {
-        this.controls.update()
+        if(this.controls)
+        {
+            this.controls.update()
+        }
     }
 }

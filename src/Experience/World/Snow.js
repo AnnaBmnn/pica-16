@@ -20,8 +20,12 @@ export default class Snow
         this.camera = this.experience.camera
 
         this.isOrder = false
-
-
+        this.finalCamera = {
+            x: 118.26296736230518,
+            y: 45.74696178109149,
+            z: 17
+        }
+        this.timeDelay = 0
         // Resource
         this.resources = 
         [
@@ -55,17 +59,18 @@ export default class Snow
 
         // Materials
         this.particlesMaterial = new THREE.PointsMaterial({
-            size: 1.5,
+            size: 0.6,
             sizeAttenuation: true,
-            color: new THREE.Color('#FFFFFF'),
+            color: new THREE.Color('#000000'),
             map: this.resources[0],
             transparent: true,
             alphaMap: this.resources[0],
             alphaTest: 0.5,
             //depthTest: false,
             depthWrite: false,
+            // emissive: 10
             // blending: THREE.AdditiveBlending,
-            vertexColors: true,
+            // vertexColors: true,
         });
 
         const geometry = new THREE.SphereGeometry(1, 32, 16);
@@ -73,7 +78,7 @@ export default class Snow
           color: 0xff0000
         });
         this.sphere = new THREE.Mesh(geometry, material);
-        this.scene.add(this.sphere);
+        // this.scene.add(this.sphere);
 
 
         // Points
@@ -111,30 +116,47 @@ export default class Snow
         })
 
         this.experience.trigger.on('trigger-order', ()=>{
+            console.log('ICI')
+
             this.isOrder = true
+            window.setTimeout(() => {
+                gsap.to(
+                    this.camera.instance.position,
+                    {
+                        duration: 7,
+                        ease: 'power2.inOut',
+                        x: 75,
+                        y: 29,
+                        z: 12
+                    },
+                )
+                // gsap.to(
+                //     this.camera.instance.rotation,
+                //     {
+                //         duration: 7,
+                //         ease: 'power2.inOut',
+                //         x: -2.00189670707885,
+                //         y: 1.16826503509461,
+                //         z: 2.034372083999237
+                //     }
+                // )
+            }, 800);
+
             gsap.to(
-                this.camera.instance.position,
+                this.particlesMaterial.color,
                 {
                     duration: 7,
                     ease: 'power2.inOut',
-                    x: 118.26296736230518,
-                    y: 45.74696178109149,
-                    z: this.camera.instance.position.z  - 21.04147625227296
+                    r: 1,
+                    g: 1,
+                    b: 0.4
                 }
             )
+            // this.particlesMaterial
             window.setTimeout(() => {
                 this.isAnimDone = true
-            }, 7200);
-            // gsap.to(
-            //     this.camera.instance.rotation,
-            //     {
-            //         duration: 7,
-            //         ease: 'power2.inOut',
-            //         x: -2.00189670707885,
-            //         y: 1.16826503509461,
-            //         z: 2.034372083999237
-            //     }
-            // )
+            }, 7000);
+
         })
 
         // Debug
@@ -339,6 +361,7 @@ export default class Snow
                 transparent: true, 
                 sizeAttenuation: true, 
                 alphaMap: sprite,
+                emissive: 10
             } )
             this.materials[ i ].color = new THREE.Color('#ffffff')
 
@@ -352,7 +375,9 @@ export default class Snow
 
         }
     }
-    
+    lerp(x, y, a){
+       return  x * (1 - a) + y * a
+    }
     attractorChau(x, y, z)
     {
         const c1 = 15.6
@@ -387,7 +412,7 @@ export default class Snow
                 this.positions[i3 + 2] = this.initialPositions[i].z;
                 
                 
-                    if(i == 1200){
+                    if(i == 50){
                         const position = this.particles.localToWorld( 
                             new THREE.Vector3(
                                 this.initialPositions[i].x,
@@ -415,21 +440,25 @@ export default class Snow
                             positionBefore.z + 0.5
                         )
                         if(!this.isOrder){
-
+                            console.log('LA')
                             this.camera.instance.position.set(
                                 position.x,
                                 position.y ,
                                 position.z
                             )
-
+                            // this.camera.instance.lookAt(
+                            //     positionBefore.x,
+                            //     positionBefore.y,
+                            //     positionBefore.z
+                            // )
                         }
-                        if(!this.isAnimDone){
-                            this.camera.instance.lookAt(
-                                positionBefore.x,
-                                positionBefore.y,
-                                positionBefore.z
-                            )
-                        }
+                        // if(!this.isAnimDone){
+                        //     this.camera.instance.lookAt(
+                        //         positionBefore.x,
+                        //         positionBefore.y,
+                        //         positionBefore.z
+                        //     )
+                        // }
 
                     }
                 
