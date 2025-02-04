@@ -13,5 +13,24 @@ export default class Audio
         this.experience.trigger.on('trigger-intro', ()=> {
             this.domAudio.play()
         })
+        document.addEventListener("visibilitychange", (event) => {
+            console.log('visilivity change')
+
+                if(document.visibilityState !== "hidden"){
+                    this.domAudio.play()
+
+                }else {
+                    this.domAudio.pause()
+
+                }
+            
+        });
+        window.addEventListener("pagehide", (event) => {
+
+            this.domAudio.pause()
+        });
+        document.addEventListener("pageshow", (event) => {
+            this.domAudio.play()
+        });
     }
 }
