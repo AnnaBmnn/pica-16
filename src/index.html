@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="./style/style.css">
     <link rel="stylesheet" href="./style/section.css">
     <link rel="stylesheet" href="./style/instruction.css">
+    <link rel="stylesheet" href="./style/credit.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Besley:ital,wght@1,600&family=Noto+Sans&display=swap" rel="stylesheet">
@@ -18,7 +19,6 @@
             <div class="section__text">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Deleniti doloribus, eveniet vero, voluptatum, et dolorum vel voluptatibus rerum esse a nemo beatae provident. Earum vero deleniti non impedit dolore. Neque.</div>
 
         </div>
-
         <button class="section__button js-button-next">Commencer</button>
     </section>
     <div class="instruction instruction--stimulus js-section-stimulus">
@@ -35,11 +35,38 @@
     </div>
     <div class="instruction instruction--resonnance js-section-resonnance">
         <p>De loin, nos chemins chaotiques révèlent une structure cachée, un motif complexe qui façonne notre danse: un attracteur étrange.</p>
-        <button class="trigger__button instruction__button button--secondary">Crédits</button>
+        <button class="trigger__button instruction__button button--secondary js-button-credit">Crédits</button>
         <button class="trigger__button instruction__button js-button-trigger-restart">Recommencer</button>
         <!-- <img class="instruction__bg" src="/imgs/bg.svg"></img> -->
         <div class="instruction__bg" ></div>
     </div>
+
+    <section class=" section js-section-credit credit is-hidden">
+        <div class="credit__content">
+            <!-- <button class=""> -->
+                <img class="credit__arrow credit__back js-credit-back" src="/imgs/icones/Arrow.svg"></img>
+            <!-- </button> -->
+            <div class="credit__text">Projet réalisé par Anna Baumann et Émilie Gélinas-Bellemare pour Pica Magazine 16p0</div>
+            <div class="credit__infos">
+                <div class="credit__bloc credit__bloc--first">
+                    <h3 class="credit__name">Anna Baumann</h3>
+                    <div class="credit__links">
+                        
+                        <a target="_blank" href="https://www.instagram.com/bannabmnn.cyber/"><img class="credit__icon" src="/imgs/icones/Instagram.svg"></img></a>
+                        <a target="_blank" href="https://www.annabaumann.fr/"><img class="credit__icon" src="/imgs/icones/Website.svg" alt=""></a>
+                    </div>
+                </div>
+                <div class="credit__bloc">
+                    <h3 class="credit__name">Émilie Gélinas-Bellemare</h3>
+                    <div class="credit__links">
+                        
+                        <a target="_blank" href="https://www.instagram.com/bannabmnn.cyber/"><img class="credit__icon" src="/imgs/icones/Instagram.svg"></img></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
 
     <canvas class="webgl "></canvas>
     <audio  loop id="audio"  class="js-audio" src="/audios/trance-cheap_LOOP.mp3" ></audio>

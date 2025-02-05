@@ -14,11 +14,13 @@ export default class Trigger extends EventEmitter
         this.buttonStimulus = document.querySelector('.js-button-trigger-stimulus')
         this.buttonOrder = document.querySelector('.js-button-trigger-order')
         this.buttonResonnance = document.querySelector('.js-button-trigger-restart')
+        this.buttonBack = document.querySelector('.js-credit-back')
+        this.buttonCredit = document.querySelector('.js-button-credit')
         this.firstSection = document.querySelector('.js-section-first')
         this.sectionStimulus = document.querySelector('.js-section-stimulus')
         this.sectionOrder = document.querySelector('.js-section-order')
         this.sectionResonnance = document.querySelector('.js-section-resonnance')
-
+        this.sectionCredit = document.querySelector('.js-section-credit')
 
 
         // Binding
@@ -26,6 +28,8 @@ export default class Trigger extends EventEmitter
         this.onButtonStimulusClick = this.onButtonStimulusClick.bind(this)
         this.onButtonOrderClick = this.onButtonOrderClick.bind(this)
         this.onButtonResonnanceClick = this.onButtonResonnanceClick.bind(this)
+        this.onButtonBackClick = this.onButtonBackClick.bind(this)
+        this.onButtonCreditClick = this.onButtonCreditClick.bind(this)
 
 
         // Event
@@ -33,6 +37,8 @@ export default class Trigger extends EventEmitter
         this.buttonStimulus.addEventListener('click', this.onButtonStimulusClick)
         this.buttonOrder.addEventListener('click', this.onButtonOrderClick)
         this.buttonResonnance.addEventListener('click', this.onButtonResonnanceClick)
+        this.buttonBack.addEventListener('click', this.onButtonBackClick)
+        this.buttonCredit.addEventListener('click', this.onButtonCreditClick)
     }
     hideScreen()
     {
@@ -68,5 +74,17 @@ export default class Trigger extends EventEmitter
         this.trigger('trigger-restart')
         this.sectionResonnance.classList.remove('is-visible')
         this.firstSection.classList.remove('is-hidden')
+    }
+    onButtonCreditClick()
+    {
+        this.sectionCredit.classList.remove('is-hidden')
+        this.sectionResonnance.classList.remove('is-visible')
+
+    }
+    onButtonBackClick()
+    {
+        this.sectionCredit.classList.add('is-hidden')
+        this.sectionResonnance.classList.add('is-visible')
+
     }
 }
