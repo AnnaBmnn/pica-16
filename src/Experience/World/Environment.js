@@ -55,6 +55,16 @@ export default class Environment
                 }
             )
         })
+        this.experience.trigger.on('trigger-restart', ()=>{
+            gsap.to(
+                this.ambientLight,
+                {
+                    duration: 6,
+                    ease: 'power2.inOut',
+                    intensity: 0.5,
+                }
+            )
+        })
 
     }
     setAmbientLight()

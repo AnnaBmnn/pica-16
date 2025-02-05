@@ -111,6 +111,23 @@ export default class Snow
         this.resetInitialPositions()
         this.setCurve()
 
+        this.experience.trigger.on('trigger-restart', ()=>{
+            this.particles.visible = false
+            this.isOrder = false
+            this.isAnimDone = false
+
+            gsap.to(
+                this.particlesMaterial.color,
+                {
+                    duration: 7,
+                    ease: 'power2.inOut',
+                    r: 0,
+                    g: 0,
+                    b: 0
+                }
+            )
+        })
+
         this.experience.trigger.on('trigger-stimulus', ()=>{
             this.particles.visible = true
         })
