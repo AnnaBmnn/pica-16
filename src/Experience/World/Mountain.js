@@ -25,12 +25,12 @@ export default class Mask
         this.soleils = this.resources.items.soleils
 
         this.pont.scene.children[0].material.color = this.pont.scene.children[0].material.emissive 
-        this.soleils.scene.children[0].material.color = this.soleils.scene.children[0].material.emissive 
+        this.soleils.scene.children[0].material.color = this.pont.scene.children[0].material.color 
 
         // this.pont.scene.children[0].material.emissive = new THREE.Color('#FFFFFF')
         // this.soleils.scene.children[0].material.emissive = new THREE.Color('#FFFFFF')
-        this.pont.scene.children[0].material.emissiveIntensity = 0
-        this.soleils.scene.children[0].material.emissiveIntensity = 0
+        this.pont.scene.children[0].material.emissiveIntensity = 0.01
+        this.soleils.scene.children[0].material.emissiveIntensity = 0.01
         console.log(this.pont.scene.children[0].material.emissiveIntensity )
         console.log(this.soleils)
 

@@ -3,6 +3,7 @@ import Experience from '../Experience.js'
 import CustomShaderMaterial from 'three-custom-shader-material/vanilla'
 import screenVertexShader from '../../shaders/vertex.glsl'
 import screenFragmentShader from '../../shaders/fragment.glsl'
+import gsap from 'gsap'
 
 export default class Tree
 {
@@ -61,7 +62,34 @@ export default class Tree
                 .max(20)
                 .step(0.1)
 
+                this.debugFolder
+                .add(this.tree.children[0].material, 'emissiveIntensity')
+                .name('emissiveIntensity')
+                .min(0)
+                .max(20)
+                .step(0.1)
+
         }
+        this.experience.trigger.on('trigger-order', ()=>{
+            gsap.to(
+                this.tree.children[0].material,
+                {
+                    duration: 3,
+                    ease: 'power2.inOut',
+                    emissiveIntensity: 0.0,
+                }
+            )
+        })
+        this.experience.trigger.on('trigger-restart', ()=>{
+            gsap.to(
+                this.tree.children[0].material,
+                {
+                    duration: 3,
+                    ease: 'power2.inOut',
+                    emissiveIntensity: 1.0,
+                }
+            )
+        })
     }
     setMaterial()
     {

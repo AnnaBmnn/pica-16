@@ -41,7 +41,7 @@ export default class Environment
                 {
                     duration: 3,
                     ease: 'power2.inOut',
-                    intensity: 1,
+                    intensity: 5,
                 }
             )
         })
@@ -51,7 +51,7 @@ export default class Environment
                 {
                     duration: 6,
                     ease: 'power2.inOut',
-                    intensity: 0.04,
+                    intensity: 0.02,
                 }
             )
         })

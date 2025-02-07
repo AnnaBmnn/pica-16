@@ -134,8 +134,6 @@ export default class Snow
         })
 
         this.experience.trigger.on('trigger-order', ()=>{
-            console.log('ICI')
-
             this.isOrder = true
             window.setTimeout(() => {
                 gsap.to(
@@ -143,9 +141,9 @@ export default class Snow
                     {
                         duration: 7,
                         ease: 'power2.inOut',
-                        x: 75,
-                        y: 29,
-                        z: 12
+                        x: 45,
+                        y: 19,
+                        z: 7
                     },
                 )
                 // gsap.to(
@@ -430,7 +428,7 @@ export default class Snow
                 this.positions[i3 + 2] = this.initialPositions[i].z;
                 
                 
-                    if(i == 50){
+                    if(i == 5000){
                         const position = this.particles.localToWorld( 
                             new THREE.Vector3(
                                 this.initialPositions[i].x,
@@ -458,7 +456,6 @@ export default class Snow
                             positionBefore.z + 0.5
                         )
                         if(!this.isOrder){
-                            console.log('LA')
                             this.camera.instance.position.set(
                                 position.x,
                                 position.y ,
