@@ -36,6 +36,8 @@ export default class Environment
         this.setEnvironmentMap()
 
         this.experience.trigger.on('trigger-stimulus', ()=>{
+            console.log(this.scene.background)
+
             gsap.to(
                 this.ambientLight,
                 {
@@ -54,6 +56,18 @@ export default class Environment
                     intensity: 0.02,
                 }
             )
+            console.log('OUI CA SE PASSE LA')
+            gsap.to(
+                this.scene.background,
+                {
+                    duration: 6,
+                    ease: 'power2.inOut',
+                    r: 0.002,
+                    g: 0.001,
+                    b: 0.0075
+                }
+            )
+            
         })
         this.experience.trigger.on('trigger-restart', ()=>{
             gsap.to(
@@ -62,6 +76,16 @@ export default class Environment
                     duration: 6,
                     ease: 'power2.inOut',
                     intensity: 0.5,
+                }
+            )
+            gsap.to(
+                this.scene.background,
+                {
+                    duration: 6,
+                    ease: 'power2.inOut',
+                    r: 0.0781874217970207,
+                    g: 0.005181516700061659,
+                    b: 0.2704977910022518
                 }
             )
         })
@@ -238,15 +262,15 @@ export default class Environment
                 .step(0.001)
                 .onChange(this.environmentMap.updateMaterials)
             
-            this.debugFolder
-                .addColor(this.debugObject , 'color')
-                .name('background color')
-                .onChange((value) =>
-                {
-                    console.log(value)
-                    this.debugObject.color = value
-                    this.scene.background =  new THREE.Color(this.debugObject.color)
-                })
+            // this.debugFolder
+            //     .addColor(this.debugObject , 'color')
+            //     .name('background color')
+            //     .onChange((value) =>
+            //     {
+            //         console.log(value)
+            //         this.debugObject.color = value
+            //         this.scene.background =  new THREE.Color(this.debugObject.color)
+            //     })
             
         }
     }
