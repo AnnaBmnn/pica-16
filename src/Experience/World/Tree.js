@@ -25,7 +25,7 @@ export default class Tree
         // Resource
         this.tree = this.resources.items.arbres.scene
 
-        this.tree.position.y -= 0
+        this.tree.position.y = -9.1
 
         // this.tree2 = this.tree.clone()
 

@@ -7,7 +7,7 @@ export default class Trigger extends EventEmitter
     {
         super()
 
-        this.delay = 2000
+        this.delay = 6000
 
         // Setup
         this.firstButton = document.querySelector('.js-button-next')
@@ -67,7 +67,7 @@ export default class Trigger extends EventEmitter
 
         window.setTimeout(() => {
             this.sectionResonnance.classList.add('is-visible')
-        }, this.delay * 5);
+        }, this.delay * 3);
     }
     onButtonResonnanceClick()
     {

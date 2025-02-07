@@ -27,6 +27,16 @@
     flex-direction: column;
 }
 
+.credit__line {
+    position: absolute;
+    top: calc(100% + 78px);
+}
+
+.credit__line a{
+    font-family: "Besley", serif;
+    color: white;
+}
+
 .credit__name {
     font-family: "Besley", serif;
     font-optical-sizing: auto;
@@ -72,5 +82,11 @@
 
     .credit__bloc {
         margin-bottom: 20px;
+    }
+    .credit__content {
+        margin-bottom: 38px;
+    }
+    .credit__line {
+        top: calc(100% + 48px);
     }
 }

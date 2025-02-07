@@ -83,8 +83,9 @@ export default class Snow
 
         // Points
         this.particles = new THREE.Points(this.particlesGeometry, this.particlesMaterial);
-        this.particles.position.set(0, 2, 0);
-        this.particles.scale.set(15.0, 15.0, 15.0);
+        this.particles.position.set(-2.1, 2.9, 0);
+        this.particles.rotation.set(0, -1.82, 0);
+        this.particles.scale.set(4.46, 20.98, 5.73);
         this.particles.visible = false;
         this.scene.add(this.particles);
 
@@ -98,7 +99,7 @@ export default class Snow
             autoRotate: true
         };
         // attractor chua
-        this.dt = 0.09; // Time step for attractor simulation
+        this.dt = 0.03; // Time step for attractor simulation
         // this.dt = 0.0001;
         this.setCurve = this.setCurve.bind(this)
         this.attractor = this.attractor.bind(this)
