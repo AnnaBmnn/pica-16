@@ -3,6 +3,13 @@
     align-items: center;
     justify-content: center;
 }
+.credit a {
+    opacity: 1;
+    transition: opacity 0.3s ease-in-out;
+}
+.credit a:hover {
+    opacity: 0.5;
+}
 
 .credit__content {
     position: relative;

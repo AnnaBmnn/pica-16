@@ -9,6 +9,7 @@
     width: 25vw;
     min-width: 250px;
     padding: 24px;
+
 }
 
 .instruction--stimulus 
@@ -36,6 +37,10 @@
 .instruction.is-visible 
 {
     opacity: 1;
+    pointer-events: none;
+}
+
+.instruction.is-visible button {
     pointer-events: all;
 }
 

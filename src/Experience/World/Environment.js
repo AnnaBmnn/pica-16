@@ -12,14 +12,14 @@ export default class Environment
         this.resources = this.experience.resources
         this.debug = this.experience.debug
         this.debugObject = {
-            color: '#B265FF',
-            pointColor: '#FFFFFF',
+            color: '#4f108e',
+            pointColor: '#ffd4b8',
             directionnalColor: '#FFFFFF',
         }
 
         console.log(this.resources.items.environmentMapTexture)
 
-        this.scene.background =  new THREE.Color('#B265FF')
+        this.scene.background =  new THREE.Color('#4f108e')
 
         
         // Debug
@@ -29,7 +29,7 @@ export default class Environment
         }
 
         this.setAmbientLight()
-        this.setDirectionalLight()
+        // this.setDirectionalLight()
         this.setPointLight()
 
         // Wait for resources
@@ -69,7 +69,7 @@ export default class Environment
     }
     setAmbientLight()
     {
-        this.ambientLight = new THREE.AmbientLight( '#B265FF' , 0.05)
+        this.ambientLight = new THREE.AmbientLight( '#B265FF' , 0.607)
         this.scene.add(this.ambientLight)
         if(this.debug.active){
             this.debugFolder
@@ -87,7 +87,7 @@ export default class Environment
         this.sunLight.shadow.camera.far = 15
         this.sunLight.shadow.mapSize.set(1024, 1024)
         this.sunLight.shadow.normalBias = 0.05
-        this.sunLight.position.set(-1.7, 3, - 1.0)
+        this.sunLight.position.set(-5, -0.8, 5)
         this.scene.add(this.sunLight)
 
         // Debug
@@ -134,12 +134,14 @@ export default class Environment
     }
     setPointLight()
     {
-        this.pointLight = new THREE.PointLight('#FFFFFF', 1)
+        this.pointLight = new THREE.PointLight('#ffd4b8', 1)
         this.pointLight.castShadow = true
         this.pointLight.shadow.camera.far = 15
+        this.pointLight.decay = 1.4
+        this.pointLight.intensity = 100
         this.pointLight.shadow.mapSize.set(1024, 1024)
         this.pointLight.shadow.normalBias = 0.05
-        this.pointLight.position.set(-1.7, 3, - 1.0)
+        this.pointLight.position.set(-1.124, 5, - 1.505)
         this.scene.add(this.pointLight)
 
         // Debug
@@ -193,7 +195,7 @@ export default class Environment
     setEnvironmentMap()
     {
         this.environmentMap = {}
-        this.environmentMap.intensity = 1
+        this.environmentMap.intensity = 0
         this.environmentMap.texture = this.resources.items.environmentMapTexture
         this.environmentMap.texture.colorSpace = THREE.SRGBColorSpace
         this.environmentMap.texture.mapping = THREE.EquirectangularReflectionMapping;

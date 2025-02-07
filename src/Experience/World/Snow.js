@@ -59,7 +59,7 @@ export default class Snow
 
         // Materials
         this.particlesMaterial = new THREE.PointsMaterial({
-            size: 0.6,
+            size: 0.5,
             sizeAttenuation: true,
             color: new THREE.Color('#000000'),
             map: this.resources[0],
