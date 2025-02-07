@@ -11,13 +11,28 @@ export default class Mask
         this.time = this.experience.time
         this.debug = this.experience.debug
 
-
+        this.debugObject = {
+            colorBridge: '#FFFFFF',
+            emissiveBridge: '#FFFFFF',
+            colorSun: '#FFFFFF',
+            emissiveSun: '#FFFFFF',
+        }
 
         // Resource
         // this.arbres = this.resources.items.arbres
         this.pont = this.resources.items.pont
         // this.sol = this.resources.items.sol
         this.soleils = this.resources.items.soleils
+
+        this.pont.scene.children[0].material.color = this.pont.scene.children[0].material.emissive 
+        this.soleils.scene.children[0].material.color = this.soleils.scene.children[0].material.emissive 
+
+        // this.pont.scene.children[0].material.emissive = new THREE.Color('#FFFFFF')
+        // this.soleils.scene.children[0].material.emissive = new THREE.Color('#FFFFFF')
+        this.pont.scene.children[0].material.emissiveIntensity = 0
+        this.soleils.scene.children[0].material.emissiveIntensity = 0
+        console.log(this.pont.scene.children[0].material.emissiveIntensity )
+        console.log(this.soleils)
 
         // this.arbres.scene.position.y -= 10
         this.pont.scene.position.y -= 10
@@ -34,47 +49,67 @@ export default class Mask
         //this.setModel()
 
         // Debug
-        if(this.debug.active && this.model)
+        if(this.debug.active )
         {
-            this.debugFolder = this.debug.ui.addFolder('Mountain')
+            this.debugFolder = this.debug.ui.addFolder('Bridge')
 
             this.debugFolder
-                .add(this.model.position, 'x')
-                .name('position x')
-                .min(-100)
-                .max(100)
+                .add(this.pont.scene.children[0].material, 'emissiveIntensity')
+                .name('emissiveIntensity')
+                .min(0)
+                .max(15)
                 .step(0.01)
-            this.debugFolder
-                .add(this.model.position, 'y')
-                .name('position y')
-                .min(-100)
-                .max(100)
-                .step(0.01)
-            this.debugFolder
-                .add(this.model.position, 'z')
-                .name('position z')
-                .min(-100)
-                .max(100)
-                .step(0.01)
+            
 
             this.debugFolder
-                .add(this.model.scale, 'x')
-                .name('scale x')
-                .min(-0.01)
-                .max(100)
-                .step(0.01)
+                .addColor(this.debugObject , 'emissiveBridge')
+                .name('emissive')
+                .onChange((value) =>
+                {
+                    console.log(value)
+                    this.debugObject.emissiveBridge = value
+                    this.pont.scene.children[0].material.emissive =  new THREE.Color(this.debugObject.emissiveBridge)
+                })
+
             this.debugFolder
-                .add(this.model.scale, 'y')
-                .name('scale y')
-                .min(-0.01)
-                .max(100)
+                .addColor(this.debugObject , 'colorBridge')
+                .name('color')
+                .onChange((value) =>
+                {
+                    console.log(value)
+                    this.debugObject.colorBridge = value
+                    this.pont.scene.children[0].material.color =  new THREE.Color(this.debugObject.colorBridge)
+                })
+            this.debugSunFolder = this.debug.ui.addFolder('Sun')
+
+            this.debugSunFolder
+                .add(this.soleils.scene.children[0].material, 'emissiveIntensity')
+                .name('emissiveIntensity')
+                .min(0)
+                .max(15)
                 .step(0.01)
-            this.debugFolder
-                .add(this.model.scale, 'z')
-                .name('scale z')
-                .min(-0.01)
-                .max(100)
-                .step(0.01)
+            
+            this.debugSunFolder
+                .addColor(this.debugObject , 'emissiveSun')
+                .name('emissive')
+                .onChange((value) =>
+                {
+                    console.log(value)
+                    this.debugObject.emissiveSun = value
+                    this.soleils.scene.children[0].material.emissive =  new THREE.Color(this.debugObject.emissiveSun)
+                })
+            
+            this.debugSunFolder
+                .addColor(this.debugObject , 'colorSun')
+                .name('color')
+                .onChange((value) =>
+                {
+                    console.log(value)
+                    this.debugObject.colorSun = value
+                    this.soleils.scene.children[0].material.color =  new THREE.Color(this.debugObject.colorSun)
+                })
+
+
         }
     }
 

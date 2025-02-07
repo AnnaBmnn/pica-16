@@ -67,7 +67,7 @@ export default class Trigger extends EventEmitter
 
         window.setTimeout(() => {
             this.sectionResonnance.classList.add('is-visible')
-        }, this.delay * 3);
+        }, this.delay * 5);
     }
     onButtonResonnanceClick()
     {
