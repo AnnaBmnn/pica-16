@@ -41,9 +41,19 @@ export default class Environment
             gsap.to(
                 this.ambientLight,
                 {
-                    duration: 3,
+                    duration: 6,
                     ease: 'power2.inOut',
-                    intensity: 5,
+                    intensity: 0.2,
+                }
+            )
+            gsap.to(
+                this.pointLight.color,
+                {
+                    duration: 6,
+                    ease: 'power2.inOut',
+                    r: 1,
+                    g: 0.56,
+                    b: 0.2
                 }
             )
         })
@@ -53,10 +63,19 @@ export default class Environment
                 {
                     duration: 6,
                     ease: 'power2.inOut',
-                    intensity: 0.02,
+                    intensity: 0.6,
                 }
             )
-            console.log('OUI CA SE PASSE LA')
+            gsap.to(
+                this.pointLight.color,
+                {
+                    duration: 6,
+                    ease: 'power2.inOut',
+                    r: 0.46,
+                    g: 0.69,
+                    b: 0.98
+                }
+            )
             gsap.to(
                 this.scene.background,
                 {
@@ -75,7 +94,17 @@ export default class Environment
                 {
                     duration: 6,
                     ease: 'power2.inOut',
-                    intensity: 0.5,
+                    intensity: 1.7,
+                }
+            )
+            gsap.to(
+                this.pointLight.color,
+                {
+                    duration: 6,
+                    ease: 'power2.inOut',
+                    r: 1,
+                    g: 0.83,
+                    b: 0.72
                 }
             )
             gsap.to(
@@ -93,7 +122,7 @@ export default class Environment
     }
     setAmbientLight()
     {
-        this.ambientLight = new THREE.AmbientLight( '#B265FF' , 0.607)
+        this.ambientLight = new THREE.AmbientLight( '#B265FF' , 1.7)
         this.scene.add(this.ambientLight)
         if(this.debug.active){
             this.debugFolder

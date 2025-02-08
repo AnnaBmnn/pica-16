@@ -42,7 +42,9 @@ export default class Floor
     }
     loadTexture()
     {
-        this.video.addEventListener('canplaythrough', ()=> {
+        console.log('start to load')
+        console.log(this.video)
+        this.video.addEventListener('canplay', ()=> {
             console.log('load')
             this.texture = new THREE.VideoTexture( this.video)
             this.texture.flipY = false

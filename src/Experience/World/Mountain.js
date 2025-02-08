@@ -1,5 +1,6 @@
 import * as THREE from 'three'
 import Experience from '../Experience.js'
+import gsap from 'gsap'
 
 export default class Mask
 {
@@ -24,13 +25,14 @@ export default class Mask
         // this.sol = this.resources.items.sol
         this.soleils = this.resources.items.soleils
 
-        this.pont.scene.children[0].material.color = this.pont.scene.children[0].material.emissive 
-        this.soleils.scene.children[0].material.color = this.pont.scene.children[0].material.color 
+        // this.pont.scene.children[0].material.color = this.pont.scene.children[0].material.emissive 
+        this.soleils.scene.children[0].material.emissive = new THREE.Color('#06CB13') 
+        this.soleils.scene.children[0].material.color = new THREE.Color('#06CB13') 
 
-        // this.pont.scene.children[0].material.emissive = new THREE.Color('#FFFFFF')
+        this.pont.scene.children[0].material.color = new THREE.Color('#bb0C95')
         // this.soleils.scene.children[0].material.emissive = new THREE.Color('#FFFFFF')
-        this.pont.scene.children[0].material.emissiveIntensity = 0.01
-        this.soleils.scene.children[0].material.emissiveIntensity = 0.01
+        this.pont.scene.children[0].material.emissiveIntensity = 0.00
+        this.soleils.scene.children[0].material.emissiveIntensity = 1
         console.log(this.pont.scene.children[0].material.emissiveIntensity )
         console.log(this.soleils)
 
@@ -47,6 +49,95 @@ export default class Mask
         console.log(this.resources.items)
 
         //this.setModel()
+        this.experience.trigger.on('trigger-stimulus', ()=>{
+
+            gsap.to(
+                this.pont.scene.children[0].material.color,
+                {
+                    duration: 6,
+                    ease: 'power2.inOut',
+                    r: 0.05,
+                    g: 0.53,
+                    b: 0.73 
+                }
+            )
+            gsap.to(
+                this.soleils.scene.children[0].material.emissive,
+                {
+                    duration: 6,
+                    ease: 'power2.inOut',
+                    r: 1,
+                    g: 0.39,
+                    b: 0.06 
+                }
+            )
+            gsap.to(
+                this.soleils.scene.children[0].material.color,
+                {
+                    duration: 6,
+                    ease: 'power2.inOut',
+                    r: 1,
+                    g: 0.39,
+                    b: 0.06 
+                }
+            )
+        })
+        this.experience.trigger.on('trigger-order', ()=>{
+            gsap.to(
+                this.soleils.scene.children[0].material.color,
+                {
+                    duration: 6,
+                    ease: 'power2.inOut',
+                    r: 1,
+                    g: 1,
+                    b: 1
+                }
+            )
+            gsap.to(
+                this.soleils.scene.children[0].material.emissive,
+                {
+                    duration: 6,
+                    ease: 'power2.inOut',
+                    r: 1,
+                    g: 1,
+                    b: 1
+                }
+            )
+        })
+
+        this.experience.trigger.on('trigger-restart', ()=>{
+
+            gsap.to(
+                this.pont.scene.children[0].material.color,
+                {
+                    duration: 6,
+                    ease: 'power2.inOut',
+                    r: 0.73,
+                    g: 0.05,
+                    b: 0.58 
+                }
+            )
+            gsap.to(
+                this.soleils.scene.children[0].material.color,
+                {
+                    duration: 6,
+                    ease: 'power2.inOut',
+                    r: 0.02,
+                    g: 0.8,
+                    b: 0.07 
+                }
+            )
+            gsap.to(
+                this.soleils.scene.children[0].material.emissive,
+                {
+                    duration: 6,
+                    ease: 'power2.inOut',
+                    r: 0.02,
+                    g: 0.8,
+                    b: 0.07 
+                }
+            )
+        })
 
         // Debug
         if(this.debug.active )
