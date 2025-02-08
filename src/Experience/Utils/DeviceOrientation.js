@@ -17,7 +17,7 @@ export default class DeviceOrientation extends EventEmitter
                 }
             })
             .catch(console.error)
-        else {
+        } else {
             window.addEventListener("devicemotion", this.handleMotionEvent, true);
         }
     }
