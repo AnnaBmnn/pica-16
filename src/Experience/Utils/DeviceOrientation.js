@@ -32,9 +32,9 @@ export default class DeviceOrientation extends EventEmitter
         // const x = event.accelerationIncludingGravity.x;
         // const y = event.accelerationIncludingGravity.y;
         // const z = event.accelerationIncludingGravity.z;
-        this.experience.snow.dt = event.alpha
+        this.experience.world.snow.dt = event.alpha
         // this.experience.camera.instance.rotation.y = event.beta
-        // this.experience.camera.instance.rotation.z = event.gamma
+        this.experience.camera.instance.rotation.z = event.gamma
       
         // Do something awesome.
     }
