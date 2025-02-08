@@ -85,7 +85,7 @@ export default class Snow
         this.particles = new THREE.Points(this.particlesGeometry, this.particlesMaterial);
         this.particles.position.set(-2.1, 2.9, 0);
         this.particles.rotation.set(0, -1.82, 0);
-        this.particles.scale.set(4.46, 20.98, 5.73);
+        this.particles.scale.set(9, 20.98, 5.73);
         this.particles.visible = false;
         this.scene.add(this.particles);
 
