@@ -1,5 +1,7 @@
 import Experience from '../Experience.js'
 import Environment from './Environment.js'
+import DeviceOrientation from './../Utils/DeviceOrientation.js'
+
 import Floor from './Floor.js'
 // import Fox from './Fox.js'
 import Mask from './Mask.js'
@@ -34,6 +36,7 @@ export default class World
             this.snow = new Snow()
             this.tree = new Tree()
 
+            this.deviceOrientation = new DeviceOrientation()
 
 
             // this.plans = new Plans()
