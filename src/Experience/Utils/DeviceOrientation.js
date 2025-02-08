@@ -13,18 +13,18 @@ export default class DeviceOrientation extends EventEmitter
         this.handleMotionEvent = this.handleMotionEvent.bind(this)
 
         this.experience.trigger.on('trigger-intro', ()=> {
-            if (typeof DeviceOrientationEvent.requestPermission === 'function') {
+            if (typeof DeviceMotionEvent.requestPermission === 'function') {
 
-                DeviceOrientationEvent.requestPermission()
+                DeviceMotionEvent.requestPermission()
                 .then(response => {
                     if (response == 'granted') {
-                        window.addEventListener("deviceorientation", this.handleMotionEvent, true);
+                        window.addEventListener("devicemotion", this.handleMotionEvent, true);
 
                     }
                 })
                 .catch(console.error)
             } else {
-                window.addEventListener("deviceorientation", this.handleMotionEvent, true);
+                window.addEventListener("devicemotion", this.handleMotionEvent, true);
             }
         })
 
@@ -40,7 +40,7 @@ export default class DeviceOrientation extends EventEmitter
         console.log(rangeNumber)
 
         this.experience.world.environment.pointLight.position.x = Math.sin(event.alpha) * 3
-        document.querySelector('.debug').innerHTML = event.alpha
+        document.querySelector('.debug').innerHTML = event.accelerationIncludingGravity.x
         // const x = event.accelerationIncludingGravity.x;
         // const y = event.accelerationIncludingGravity.y;
         // const z = event.accelerationIncludingGravity.z;
