@@ -7,14 +7,19 @@ export default class DeviceOrientation extends EventEmitter
         super()
 
         console.log('HEY')
-        DeviceMotionEvent.requestPermission()
-        .then(response => {
-          if (response == 'granted') {
-            window.addEventListener("devicemotion", this.handleMotionEvent, true);
+        if (typeof DeviceMotionEvent.requestPermission === 'function') {
 
-          }
-        })
-        .catch(console.error)
+            DeviceMotionEvent.requestPermission()
+            .then(response => {
+                if (response == 'granted') {
+                    window.addEventListener("devicemotion", this.handleMotionEvent, true);
+
+                }
+            })
+            .catch(console.error)
+        else {
+            window.addEventListener("devicemotion", this.handleMotionEvent, true);
+        }
     }
     handleMotionEvent(event) {
         console.log(event)
