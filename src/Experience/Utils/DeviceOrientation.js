@@ -9,6 +9,8 @@ export default class DeviceOrientation extends EventEmitter
         super()
         this.experience = new Experience()
 
+        this.mapNumRange = this.mapNumRange.bind(this)
+
         this.experience.trigger.on('trigger-intro', ()=> {
             if (typeof DeviceOrientationEvent.requestPermission === 'function') {
 
@@ -34,6 +36,7 @@ export default class DeviceOrientation extends EventEmitter
     handleMotionEvent(event) {
         console.log(event)
         const rangeNumber = this.mapNumRange(event.alpha, 0, 360, 0, 10 )
+        console.log(rangeNumber)
 
         this.experience.world.environment.pointLight.position.x += rangeNumber
         document.querySelector('.debug').innerHTML = rangeNumber
