@@ -2,6 +2,7 @@ import * as THREE from 'three'
 
 import Debug from './Utils/Debug.js'
 import Sizes from './Utils/Sizes.js'
+import DeviceOrientation from './Utils/DeviceOrientation.js'
 import Interface from './UI/Interface.js'
 import Trigger from './UI/Trigger.js'
 import Time from './Utils/Time.js'
