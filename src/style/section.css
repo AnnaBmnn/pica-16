@@ -20,6 +20,9 @@
     opacity: 0;
     pointer-events: none;
 }
+.section__container {
+    align-self: flex-start;
+}
 .section__title {
     font-family: "Besley", serif;
     font-optical-sizing: auto;
