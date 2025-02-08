@@ -78,3 +78,11 @@ button:hover {
     color: black;
     background-color: white;
 }
+
+.debug {
+    position: fixed;
+    z-index: 10;
+    top: 10px;
+    left: 10px;
+    background-color: red;
+}

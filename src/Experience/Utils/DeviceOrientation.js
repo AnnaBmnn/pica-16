@@ -28,7 +28,7 @@ export default class DeviceOrientation extends EventEmitter
     }
     handleMotionEvent(event) {
         console.log(event)
-        document.querySelector('.js-title').innerHTML = event.alpha + ' ' + event.beta + ' ' + event.gamma
+        document.querySelector('.debug').innerHTML = event.alpha + ' ' + event.beta + ' ' + event.gamma + this.experience.camera.instance.rotation.x
         // const x = event.accelerationIncludingGravity.x;
         // const y = event.accelerationIncludingGravity.y;
         // const z = event.accelerationIncludingGravity.z;
