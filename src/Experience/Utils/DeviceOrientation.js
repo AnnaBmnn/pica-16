@@ -32,7 +32,7 @@ export default class DeviceOrientation extends EventEmitter
         // const x = event.accelerationIncludingGravity.x;
         // const y = event.accelerationIncludingGravity.y;
         // const z = event.accelerationIncludingGravity.z;
-        this.experience.world.tree.tree.children[0].material.emissive = event.alpha * 1
+        this.experience.world.tree.tree.children[0].material.emissiveIntesity = event.alpha * 0.1
         // this.experience.camera.instance.rotation.x = event.alpha * (Math.PI / 180)
         // this.experience.camera.instance.rotation.y = event.beta * (Math.PI / 180)
         // this.experience.camera.instance.rotation.z = event.gamma * (Math.PI / 180)
