@@ -9,7 +9,7 @@ export default class DeviceOrientation extends EventEmitter
         console.log('HEY')
         window.addEventListener("devicemotion", this.handleMotionEvent, true);
     }
-    c(event) {
+    handleMotionEvent(event) {
         console.log(event)
         document.querySelector('.js-title').innerHTML = event
         const x = event.accelerationIncludingGravity.x;
