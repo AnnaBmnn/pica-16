@@ -10,6 +10,7 @@ export default class DeviceOrientation extends EventEmitter
         this.experience = new Experience()
 
         this.mapNumRange = this.mapNumRange.bind(this)
+        this.handleMotionEvent = this.handleMotionEvent.bind(this)
 
         this.experience.trigger.on('trigger-intro', ()=> {
             if (typeof DeviceOrientationEvent.requestPermission === 'function') {
