@@ -40,7 +40,7 @@ export default class DeviceOrientation extends EventEmitter
         console.log(rangeNumber)
 
         this.experience.world.environment.pointLight.position.x = event.accelerationIncludingGravity.x * 10
-        document.querySelector('.debug').innerHTML = event.accelerationIncludingGravity.x
+        // document.querySelector('.debug').innerHTML = event.accelerationIncludingGravity.x
         // const x = event.accelerationIncludingGravity.x;
         // const y = event.accelerationIncludingGravity.y;
         // const z = event.accelerationIncludingGravity.z;
