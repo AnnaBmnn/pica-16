@@ -61,7 +61,7 @@ export default class Camera
     {
         if(this.controls)
         {
-            this.controls.update()
+            // this.controls.update()
         }
     }
 }
