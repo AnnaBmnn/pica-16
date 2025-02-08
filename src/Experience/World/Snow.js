@@ -428,7 +428,7 @@ export default class Snow
                 this.positions[i3 + 2] = this.initialPositions[i].z;
                 
                 
-                    if(i == 5000){
+                    if(i == 200){
                         const position = this.particles.localToWorld( 
                             new THREE.Vector3(
                                 this.initialPositions[i].x,

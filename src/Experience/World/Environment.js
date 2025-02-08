@@ -57,6 +57,16 @@ export default class Environment
                 }
             )
             gsap.to(
+                this.scene.background,
+                {
+                    duration: 6,
+                    ease: 'power2.inOut',
+                    r: 1,
+                    g: 0.56,
+                    b: 0.2
+                }
+            )
+            gsap.to(
                 this.pointLight.color,
                 {
                     duration: 6,
@@ -73,7 +83,7 @@ export default class Environment
                 {
                     duration: 6,
                     ease: 'power2.inOut',
-                    intensity: 0.6,
+                    intensity: 0.1,
                 }
             )
             gsap.to(

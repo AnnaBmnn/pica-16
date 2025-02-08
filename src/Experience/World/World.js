@@ -36,7 +36,7 @@ export default class World
             this.snow = new Snow()
             this.tree = new Tree()
 
-            this.deviceOrientation = new DeviceOrientation()
+            // this.deviceOrientation = new DeviceOrientation()
 
 
             // this.plans = new Plans()
