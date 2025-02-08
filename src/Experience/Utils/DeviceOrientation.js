@@ -33,7 +33,7 @@ export default class DeviceOrientation extends EventEmitter
     }
     handleMotionEvent(event) {
         console.log(event)
-        const rangeNumber = this.mapNumRange(360 - event.alpha, 0, 360, -5, 5 )
+        const rangeNumber = this.mapNumRange(event.alpha, 0, 360, 0, 10 )
 
         this.experience.world.environment.pointLight.position.x += rangeNumber
         document.querySelector('.debug').innerHTML = rangeNumber
