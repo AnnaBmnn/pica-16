@@ -36,6 +36,7 @@ export default class Experience
         this.debug = new Debug()
         this.sizes = new Sizes()
         this.time = new Time()
+        this.deviceOrientation = new DeviceOrientation()
         this.interface = new Interface()
         this.trigger = new Trigger()
         this.scene = new THREE.Scene()
