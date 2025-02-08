@@ -47,6 +47,16 @@ export default class Environment
                 }
             )
             gsap.to(
+                this.ambientLight.groundColor,
+                {
+                    duration: 6,
+                    ease: 'power2.inOut',
+                    r: 1,
+                    g: 0.83,
+                    b: 0.72
+                }
+            )
+            gsap.to(
                 this.pointLight.color,
                 {
                     duration: 6,
@@ -122,7 +132,7 @@ export default class Environment
     }
     setAmbientLight()
     {
-        this.ambientLight = new THREE.AmbientLight( '#B265FF' , 1.7)
+        this.ambientLight = new THREE.HemisphereLight( '#B265FF', '#B265FF' , 1.7)
         this.scene.add(this.ambientLight)
         if(this.debug.active){
             this.debugFolder
