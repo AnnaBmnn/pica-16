@@ -39,7 +39,7 @@ export default class DeviceOrientation extends EventEmitter
         const rangeNumber = this.mapNumRange(event.alpha, 0, 360, 0, 10 )
         console.log(rangeNumber)
 
-        this.experience.world.environment.pointLight.position.x = event.alpha
+        this.experience.world.environment.pointLight.position.x = Math.sin(event.alpha) * 3
         document.querySelector('.debug').innerHTML = event.alpha
         // const x = event.accelerationIncludingGravity.x;
         // const y = event.accelerationIncludingGravity.y;
