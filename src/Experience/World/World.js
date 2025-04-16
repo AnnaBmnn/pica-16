@@ -4,7 +4,7 @@ import DeviceOrientation from './../Utils/DeviceOrientation.js'
 
 import Floor from './Floor.js'
 import Mountain from './Mountain.js'
-import Snow from './Snow.js'
+import Particles from './Particles.js'
 import Tree from './Tree.js'
 
 import Audio from './Audio.js'
@@ -25,7 +25,7 @@ export default class World
             // Setup
             this.floor = new Floor()
             this.mountain = new Mountain()
-            this.snow = new Snow()
+            this.particles = new Particles()
             this.tree = new Tree()
 
 
@@ -40,8 +40,8 @@ export default class World
     {
         if(this.mountain)
             this.mountain.update()
-        if(this.snow)
-            this.snow.update()
+        if(this.particles)
+            this.particles.update()
         if(this.tree)
             this.tree.update()
         if(this.plans)

@@ -8,7 +8,7 @@ import gsap from 'gsap'
 
 // https://fusefactory.github.io/openfuse/strange%20attractors/particle%20system/Strange-Attractors-GPU/
 
-export default class Snow
+export default class Particles
 {
     constructor()
     {
