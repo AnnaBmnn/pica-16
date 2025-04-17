@@ -71,8 +71,6 @@ void main()
     uvDeform.x += sin(vUv.y * 0.1 + 2.0 + vTime * 0.000001) * 0.3;
     uvDeform.y += sin(vUv.x * 2.1 + 3.0 + vTime * 0.000003) * 1.2;
 
-    // uvDeform.y += random(vUv) * 0.001;
-
 
     float patternSquareX = step(0.5, mod( uvDeform.x * 1000.0 - vTime * 0.000001 , 1.0));
     float patternSquareY = step(0.5, mod( uvDeform.y * 1000.0, 1.0));
@@ -94,9 +92,4 @@ void main()
 
     csm_DiffuseColor.rgb *= vec3( pattern );
     csm_Emissive.rgb *= vec3(pattern);
-
-    // csm_Emissive.rgb += random(vUv) * 0.2;
-    // csm_DiffuseColor.rgb = vec3(vUv.y * 10.0);
-
-
 }

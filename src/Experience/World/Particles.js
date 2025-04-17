@@ -37,15 +37,6 @@ export default class Particles
             [[ 0.0, 0.0, 1.0 ], this.resources[0], 1.0 ]
         ]
 
-        /*
-        parameters = [
-            [[ 1.0, 0.2, 0.5 ], sprite2, 20 ],
-            [[ 0.95, 0.1, 0.5 ], sprite3, 15 ],
-            [[ 0.90, 0.05, 0.5 ], sprite1, 10 ],
-            [[ 0.85, 0, 0.5 ], sprite5, 8 ],
-            [[ 0.80, 0, 0.5 ], sprite4, 5 ]
-        ]
-        */
 
         // Geometry
         this.particlesGeometry = new THREE.BufferGeometry()
@@ -73,13 +64,6 @@ export default class Particles
             // vertexColors: true,
         });
 
-        const geometry = new THREE.SphereGeometry(1, 32, 16);
-        const material = new THREE.MeshBasicMaterial({
-          color: 0xff0000
-        });
-        this.sphere = new THREE.Mesh(geometry, material);
-        // this.scene.add(this.sphere);
-
 
         // Points
         this.particles = new THREE.Points(this.particlesGeometry, this.particlesMaterial);
@@ -101,7 +85,6 @@ export default class Particles
         // attractor chua
         this.dt = 0.03; // Time step for attractor simulation
         // this.dt = 0.0001;
-        this.setCurve = this.setCurve.bind(this)
         this.attractor = this.attractor.bind(this)
         this.attractorChau = this.attractorChau.bind(this)
 
@@ -110,7 +93,6 @@ export default class Particles
 
         this.initialPositions = []
         this.resetInitialPositions()
-        this.setCurve()
 
         this.experience.trigger.on('trigger-restart', ()=>{
             this.particles.visible = false
@@ -272,65 +254,6 @@ export default class Particles
 
         }
     }
-    setCurve()
-    {
-        //Create a closed wavey loop
-        this.positionCurve = []
-        /*
-        this.initalPositionsCurve = new THREE.Vector3(
-            3.619173690171568,
-            2.4277559947551337,
-            0.08119092966911379
-        )
-        */
-        // CHAU
-        
-        this.initalPositionsCurve = new THREE.Vector3(
-            0.01,
-            0.1,
-            0.0
-        )
-        
-        var dx = 0
-        var dy = 0
-        var dz = 0
-
-        this.positionCurve.push(new THREE.Vector3( this.initalPositionsCurve.x, this.initalPositionsCurve.y, this.initalPositionsCurve.z ))
-
-        for (let i = 0; i < 20000; i++) {
-            
-            const { dx, dy, dz } = this.attractorChau( this.initalPositionsCurve.x, this.initalPositionsCurve.y, this.initalPositionsCurve.z)
-
-            
-            // chua
-            this.initalPositionsCurve.x += dx;
-            this.initalPositionsCurve.y += dy;
-            this.initalPositionsCurve.z += dz;
-            
-            /*
-            this.initalPositionsCurve.x += dx * 0.0001;
-            this.initalPositionsCurve.y += dy * 0.0001;
-            this.initalPositionsCurve.z += dz * 0.0001;
-            */
-            // console.log(this.initalPositionsCurve)
-    
-            this.positionCurve.push(new THREE.Vector3( this.initalPositionsCurve.x, this.initalPositionsCurve.y, this.initalPositionsCurve.z))
-        }
-
-        const curve = new THREE.CatmullRomCurve3(this.positionCurve );
-
-        const points = curve.getPoints( 20000 );
-        const geometry = new THREE.BufferGeometry().setFromPoints( points );
-
-        const material = new THREE.LineBasicMaterial( { color: 0xff0000 } );
-
-        // Create the final object to add to the scene
-        this.curveObject = new THREE.Line( geometry, material );
-        this.curveObject.scale.set(10.0, 10.0, 10.0)
-        this.curveObject.visible = false
-
-        this.scene.add(this.curveObject)
-    }
     attractor(x, y, z) 
     {
         /*
@@ -353,44 +276,6 @@ export default class Particles
 
     }
 
-    setGeometry()
-    {
-        this.geometry.setAttribute( 'position', new THREE.Float32BufferAttribute( this.vertices, 3 ) )
-    }
-
-    setPoints()
-    {
-        this.customUniforms = {
-            uTime: { value: 0 }
-        }
-        for ( let i = 0; i < this.parameters.length; i ++ ) {
-
-            const color = this.parameters[ i ][ 0 ]
-            const sprite = this.parameters[ i ][ 1 ]
-            const size = this.parameters[ i ][ 2 ]
-
-            this.materials[ i ] = new THREE.PointsMaterial( { 
-                size: size, 
-                map: sprite, 
-                blending: THREE.AdditiveBlending,  
-                // depthTest: true, 
-                transparent: true, 
-                sizeAttenuation: true, 
-                alphaMap: sprite,
-                emissive: 10
-            } )
-            this.materials[ i ].color = new THREE.Color('#ffffff')
-
-            const particles = new THREE.Points( this.geometry, this.materials[ i ] )
-
-            particles.rotation.x = Math.random() * 6
-            particles.rotation.y = Math.random() * 6
-            particles.rotation.z = Math.random() * 6
-
-            this.scene.add( particles )
-
-        }
-    }
     lerp(x, y, a){
        return  x * (1 - a) + y * a
     }
@@ -445,47 +330,19 @@ export default class Particles
                             )
                         )                        
 
-                        // this.camera.instance.lookAt(
-                        //     positionBefore.x,
-                        //     positionBefore.y,
-                        //     positionBefore.z
-                        // )
-                        this.sphere.position.set(
-                            positionBefore.x + 0.5,
-                            positionBefore.y + 0.5,
-                            positionBefore.z + 0.5
-                        )
                         if(!this.isOrder){
                             this.camera.instance.position.set(
                                 position.x,
                                 position.y ,
                                 position.z
                             )
-                            // this.camera.instance.lookAt(
-                            //     positionBefore.x,
-                            //     positionBefore.y,
-                            //     positionBefore.z
-                            // )
-                        }
-                        // if(!this.isAnimDone){
-                        //     this.camera.instance.lookAt(
-                        //         positionBefore.x,
-                        //         positionBefore.y,
-                        //         positionBefore.z
-                        //     )
-                        // }
 
+                        }
                     }
-                
-                
-                
-                
                 
             }
         
             this.particlesGeometry.attributes.position.needsUpdate = true;
-            
-            
         }
         
     }

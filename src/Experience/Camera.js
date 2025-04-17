@@ -47,7 +47,7 @@ export default class Camera
         this.controls = new OrbitControls(this.instance, this.canvas)
         this.controls.enableDamping = true
         this.controls.maxDistance = 160
-        this.controls.target = this.experience.world.snow.particles.position
+        this.controls.target = this.experience.world.particles.particles.position
         console.log(this.experience.world)
     }
 
